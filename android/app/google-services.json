@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1032662480997",
+    "firebase_url": "https://lucid-1242.firebaseio.com",
+    "project_id": "lucid-1242",
+    "storage_bucket": "lucid-1242.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1032662480997:android:2f46ce890fa26e78f16e8c",
+        "android_client_info": {
+          "package_name": "com.team.lucid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1032662480997-juvhcrum6tokmepipsf07h2oqe3ihcre.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOBVpPOBV_MvBaKzH1rktglK42DBdG1VU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1032662480997-juvhcrum6tokmepipsf07h2oqe3ihcre.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
