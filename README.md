@@ -1,6 +1,6 @@
 # lucid
 
-A new Flutter application.
+A new Flutter application based on AR and VR
 
 ## Getting Started
 
