@@ -1,10 +1,22 @@
-import 'dart:io';
-import 'package:firebase_ml_vision/firebase_ml_vision.dart';
-
+import 'dart:async';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:e_shop/Counters/BookQuantity.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'Authentication/authenication.dart';
+import 'package:e_shop/Config/config.dart';
+import 'Counters/cartitemcounter.dart';
+import 'Counters/changeAddresss.dart';
+import 'Counters/totalMoney.dart';
+import 'Store/storehome.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  EcommerceApp.auth = FirebaseAuth.instance;
+
   runApp(MyApp());
 }
 
@@ -12,88 +24,67 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: MyHomePage(),
-    );
+        title: 'Lucid',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primaryColor: Colors.green,
+        ),
+        home: SplashScreen());
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key}) : super(key: key);
+class SplashScreen extends StatefulWidget {
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _SplashScreenState createState() => _SplashScreenState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
 
-  File pickedImage;
+    displaySplash();
+  }
 
-  bool isImageLoaded=false;
-
-  Future pickImage() async{
-    var tempStore=await ImagePicker.pickImage(source: ImageSource.gallery);
-    setState(() {
-      pickedImage=tempStore;
-      isImageLoaded=true;
+  displaySplash() {
+    Timer(Duration(seconds: 4), () async {
+      if (EcommerceApp.auth.currentUser() != null) {
+        Route route = MaterialPageRoute(builder: (_) => StoreHome());
+        Navigator.pushReplacement(context, route);
+      } else {
+        Route route = MaterialPageRoute(builder: (_) => AuthenticScreen());
+        Navigator.pushReplacement(context, route);
+      }
     });
   }
 
-  Future readText() async{
-     FirebaseVisionImage ourImage=FirebaseVisionImage.fromFile(pickedImage);
-     TextRecognizer recognizeText=FirebaseVision.instance.textRecognizer();
-     VisionText readText= await recognizeText.processImage(ourImage);
-     for(TextBlock block in readText.blocks)  {
-      for(TextLine line in block.lines){
-        for(TextElement word in line.elements){
-          print(word.text);
-        }
-      } 
-     }
-  }
-  
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Container(
-          alignment: Alignment(0.0, 0.0),
-          child: Text('Ludddcidhg')
-          ),
-      ),
-      body: Center(
+    return Material(
+        child: Container(
+      decoration: new BoxDecoration(
+          gradient: new LinearGradient(
+        colors: [Colors.blue, Colors.deepPurple],
+        begin: const FractionalOffset(0.0, 0.0),
+        end: const FractionalOffset(1.0, 0.0),
+        stops: [0.0, 1.0],
+        tileMode: TileMode.clamp,
+      )),
+      child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            isImageLoaded? Center(
-              child:Container(
-                height: 200.0,
-                width: 200.0,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: FileImage(pickedImage),
-                    fit: BoxFit.cover
-                  )
-                ),
-              ),
-            ):Container(),
-            SizedBox(height: 10.0,),
-            RaisedButton(
-              onPressed: pickImage,
-              child: Text('Pick an Image'),
-              ),
-              SizedBox(height: 10.0,),
-              RaisedButton(
-                onPressed: readText,
-                child: Text('Read Text'),
-              )
+          children: [
+            Image.asset("images/welcome.png"),
+            SizedBox(
+              height: 20.0,
+            ),
+            Text(
+              "Care Connect Share",
+              style: TextStyle(color: Colors.white),
+            )
           ],
         ),
       ),
-    );
+    ));
   }
 }
