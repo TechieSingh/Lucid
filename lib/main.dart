@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_shop/Counters/BookQuantity.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Authentication/authenication.dart';
@@ -17,6 +18,11 @@ Future<void> main() async {
 
   EcommerceApp.auth = FirebaseAuth.instance;
 
+=======
+import 'package:image_picker/image_picker.dart';
+//MAin call to function
+void main() {
+>>>>>>> c1212776d7e44d9bd5d5e805e76f38d6f163cf16
   runApp(MyApp());
 }
 
