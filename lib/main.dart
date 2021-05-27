@@ -73,7 +73,7 @@ class _SplashScreenState extends State<SplashScreen> {
               height: 20.0,
             ),
             Text(
-              "Care Connect Share",
+              "Care  Connect  Share",
               style: TextStyle(color: Colors.white),
             )
           ],
