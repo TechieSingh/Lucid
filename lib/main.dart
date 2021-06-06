@@ -9,8 +9,12 @@ import 'Authentication/authenication.dart';
 import 'Config/config.dart';
 import 'Store/storehome.dart';
 
-//MAin call to function
-void main() {
+Future<void>main() async
+{
+  WidgetsFlutterBinding.ensureInitialized();
+
+  EcommerceApp.auth=FirebaseAuth.instance;
+
   runApp(MyApp());
 }
 
